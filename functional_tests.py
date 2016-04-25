@@ -1,34 +1,42 @@
 from selenium import webdriver
 import unittest
 
-browser = webdriver.Firefox()
+class NewVisitorTest(unittest.TestCase):
 
-# Edith has heard about this great to-do list app
-# She goes to check it out in her browser
-browser.get('http://localhost:8000')
-try:
+    def setUp(self):
+        self.browser = webdriver.Firefox()
 
-    # She's the title mentions the title and page header, so decides she's in the right place
-    assert 'TODO:' in browser.title
+    def tearDown(self):
+        self.browser.quit()
 
-    # She is invited to start a to-do list straight away
+    def test_can_start_a_list_and_retrieve_it_later(self):
 
-    # She types "buy some peacock feathers"
+        # Edith has heard about this great to-do list app
+        # She goes to check it out in her browser
+        self.browser.get('http://localhost:8000')
 
-    # When she hits enter the page updates and outputs "1 - buy some peacok feathers"
+        # She's the title mentions the title and page header, so decides she's in the right place
+        assert 'TODO:' in browser.title
 
-    # There is still a text box for another item
+        # She is invited to start a to-do list straight away
 
-    # She enters "Use peacock feather to make a fly"
+        # She types "buy some peacock feathers"
 
-    # The page updates again, and now shows both items on her list
+        # When she hits enter the page updates and outputs "1 - buy some peacok feathers"
 
-    # Edith wonders whether the site will remember her
-    # She sees the site has generated a unique URL for her -- there is some explanatory text to that effect
+        # There is still a text box for another item
 
-    # She visits that URL and her to-do list is still there
+        # She enters "Use peacock feather to make a fly"
 
-    # Satisfied she goes back to sleep
+        # The page updates again, and now shows both items on her list
 
-finally:
-    browser.quit()
+        # Edith wonders whether the site will remember her
+        # She sees the site has generated a unique URL for her -- there is some explanatory text to that effect
+
+        # She visits that URL and her to-do list is still there
+
+        # Satisfied she goes back to sleep
+
+
+if __name__ == '__main__':
+    unittest.main(warnings='ignore')
